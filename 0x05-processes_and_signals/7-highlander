@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+# This script is displaying "alx sorftware engineering school" 
+trap interrup SIGTERM
+
+interrup()
+{
+    echo "I am invincible!!!"
+}
+
+while true
+do
+    echo "To infinity and beyond"
+    sleep 2
+done
