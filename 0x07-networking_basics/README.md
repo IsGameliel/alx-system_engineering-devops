@@ -35,4 +35,4 @@ What you should learn from this project:
 ---
 
 ## Author
-* **Rory Fahy** - [rmf10003](https://github.com/rmf10003)
+* **Eugene Ibiso** - [arvicrin](https://github.com/isgameliel)
