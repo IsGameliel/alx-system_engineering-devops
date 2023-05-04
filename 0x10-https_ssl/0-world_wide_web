@@ -17,7 +17,7 @@ function subdomain_check {
 
 if [ $# -lt 1 ]
 then
-	echo "*** Provide domain name ***"
+	echo "https://www.sozoilfield.com"
 elif [ $# -eq 1 ]
 then
 	domain_check "$1";
