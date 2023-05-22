@@ -1,33 +1,38 @@
 #!/usr/bin/python3
+
 """
-Using https://jsonplaceholder.typicode.com
-returns info about employee TODO progress
-Implemented using recursion
+Python script that, using a REST API, for a given employee ID,
+returns information about his/her TODO list progress.
 """
-import re
-import requests
-import sys
+
+from requests import get
+from sys import argv
 
 
-API = "https://jsonplaceholder.typicode.com"
-"""REST API url"""
+if __name__ == "__main__":
+    response = get('https://jsonplaceholder.typicode.com/todos/')
+    data = response.json()
+    completed = 0
+    total = 0
+    tasks = []
+    response2 = get('https://jsonplaceholder.typicode.com/users')
+    data2 = response2.json()
 
+    for i in data2:
+        if i.get('id') == int(argv[1]):
+            employee = i.get('name')
 
-if __name__ == '__main__':
-    if len(sys.argv) > 1:
-        if re.fullmatch(r'\d+', sys.argv[1]):
-            id = int(sys.argv[1])
-            user_res = requests.get('{}/users/{}'.format(API, id)).json()
-            todos_res = requests.get('{}/todos'.format(API)).json()
-            user_name = user_res.get('name')
-            todos = list(filter(lambda x: x.get('userId') == id, todos_res))
-            todos_done = list(filter(lambda x: x.get('completed'), todos))
-            print(
-                'Employee {} is done with tasks({}/{}):'.format(
-                    user_name,
-                    len(todos_done),
-                    len(todos)
-                )
-            )
-            for todo_done in todos_done:
-                print('\t {}'.format(todo_done.get('title')))
+    for i in data:
+        if i.get('userId') == int(argv[1]):
+            total += 1
+
+            if i.get('completed') is True:
+                completed += 1
+                tasks.append(i.get('title'))
+
+    print("Employee {} is done with tasks({}/{}):".format(employee, completed,
+                                                          total))
+
+    for i in tasks:
+        print("\t {}".format(i))
+        
